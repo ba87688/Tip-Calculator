@@ -2,6 +2,8 @@ package com.example.tipcalculater
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.widget.EditText
 import android.widget.SeekBar
@@ -42,7 +44,7 @@ class MainActivity : AppCompatActivity() {
 
         //set initial value
         seekBarTip.progress = INITIAL_TIP
-        tvTipPercentLabel.text = "$INITIAL_TIP%"
+        tvTipPercentLabel.text = "$INITIAL_TIP"
 
 
 
@@ -51,6 +53,7 @@ class MainActivity : AppCompatActivity() {
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
                 Log.i(TAG, "onProgressChanged: $progress")
                 tvTipPercentLabel.text = "$progress%"
+                calcTipAndTotal()
 
             }
 
@@ -63,7 +66,37 @@ class MainActivity : AppCompatActivity() {
 
         })
 
+        //edittext listener
+        etBaseAmount.addTextChangedListener(object: TextWatcher{
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
 
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+
+                Log.i(TAG, "afterTextChanged: text changed to ${s}")
+                calcTipAndTotal()
+            }
+
+        })
+
+    }
+
+    private fun calcTipAndTotal() {
+        //this method is used to 1. get value of base total and tip percentage. 2. calculate the tip
+        //3. find total and update the user interface
+        val baseAmount = etBaseAmount.text.toString().toDouble()
+        //get tip %
+        val tipPercentage = seekBarTip.progress
+        //calc tip total
+        val tipAmount = baseAmount*tipPercentage/100
+        val totalAmount = baseAmount+ tipAmount
+
+//        update ui
+        tvTipAmount.text = tipAmount.toString()
+        tvTotalAmount.text = totalAmount.toString()
     }
 
 }
