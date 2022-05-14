@@ -44,8 +44,9 @@
         android:layout_height="wrap_content"
         android:text="TextView"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        tools:layout_editor_absoluteX="164dp"
-        tools:layout_editor_absoluteY="178dp" />
+        app:layout_constraintBottom_toBottomOf="@+id/actualTip"
+        app:layout_constraintStart_toStartOf="@+id/tipSeekBar"
+        app:layout_constraintTop_toTopOf="@+id/actualTip" />
 
     <TextView
         android:id="@+id/textViewTotal"
@@ -53,8 +54,9 @@
         android:layout_height="wrap_content"
         android:text="TextView"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        tools:layout_editor_absoluteX="164dp"
-        tools:layout_editor_absoluteY="242dp" />
+        app:layout_constraintBottom_toBottomOf="@+id/totalAmount"
+        app:layout_constraintStart_toStartOf="@+id/textViewTipAmount"
+        app:layout_constraintTop_toTopOf="@+id/totalAmount" />
 
     <TextView
         android:id="@+id/textView7"
@@ -72,17 +74,18 @@
         android:layout_width="210dp"
         android:layout_height="wrap_content"
         android:max="35"
-        tools:layout_editor_absoluteX="149dp"
-        tools:layout_editor_absoluteY="120dp" />
+        app:layout_constraintBottom_toBottomOf="@+id/percentageTip"
+        app:layout_constraintStart_toStartOf="@+id/editTextBaseAmount"
+        app:layout_constraintTop_toTopOf="@+id/percentageTip" />
 
     <TextView
         android:id="@+id/percentageTip"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
-        android:textStyle="bold"
         android:text="24%"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textStyle="bold"
 
         app:layout_constraintEnd_toEndOf="@+id/tipBaseLabel"
         app:layout_constraintTop_toBottomOf="@+id/tipBaseLabel" />
@@ -91,8 +94,11 @@
         android:id="@+id/editTextBaseAmount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
         android:ems="8"
+        android:hint="Bill Amount?"
         android:inputType="numberDecimal"
-        tools:layout_editor_absoluteX="115dp"
+        android:textSize="24sp"
+        app:layout_constraintStart_toEndOf="@+id/tipBaseLabel"
         tools:layout_editor_absoluteY="35dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>
