@@ -28,7 +28,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(view)
 
         //edittext for bill amount
-        etBaseAmount = binding.editTextBaseAmount
+        etBaseAmount = binding.etBaseAmount
         //tip seeker bar
         seekBarTip = binding.tipSeekBar
 
@@ -44,8 +44,10 @@ class MainActivity : AppCompatActivity() {
 
         //set initial value
         seekBarTip.progress = INITIAL_TIP
-        tvTipPercentLabel.text = "$INITIAL_TIP"
+        tvTipPercentLabel.text = "$INITIAL_TIP%"
 
+//        etBaseAmount.setText("0")
+        Log.i(TAG, "HELLLOOOOO: $etBaseAmount")
 
 
         //seekbar listener
@@ -53,6 +55,8 @@ class MainActivity : AppCompatActivity() {
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
                 Log.i(TAG, "onProgressChanged: $progress")
                 tvTipPercentLabel.text = "$progress%"
+//                tvTipAmount.text = "$progress%"
+//                tvTotalAmount.text = "$progress%"
                 calcTipAndTotal()
 
             }
@@ -77,6 +81,7 @@ class MainActivity : AppCompatActivity() {
             override fun afterTextChanged(s: Editable?) {
 
                 Log.i(TAG, "afterTextChanged: text changed to ${s}")
+//                System.out.println(etBaseAmount.text.toString().toDouble())
                 calcTipAndTotal()
             }
 
@@ -85,18 +90,25 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun calcTipAndTotal() {
-        //this method is used to 1. get value of base total and tip percentage. 2. calculate the tip
-        //3. find total and update the user interface
-        val baseAmount = etBaseAmount.text.toString().toDouble()
-        //get tip %
-        val tipPercentage = seekBarTip.progress
-        //calc tip total
-        val tipAmount = baseAmount*tipPercentage/100
-        val totalAmount = baseAmount+ tipAmount
+        if(etBaseAmount.text.isEmpty()){
+            tvTipAmount.text = ""
+            tvTotalAmount.text = ""
+            return
+
+        }else {
+            //this method is used to 1. get value of base total and tip percentage. 2. calculate the tip
+            //3. find total and update the user interface
+            val baseAmount = etBaseAmount.text.toString().toDouble()
+            //get tip %
+            val tipPercentage = seekBarTip.progress
+            //calc tip total
+            val tipAmount = baseAmount * tipPercentage / 100
+            val totalAmount = baseAmount + tipAmount
 
 //        update ui
-        tvTipAmount.text = tipAmount.toString()
-        tvTotalAmount.text = totalAmount.toString()
+            tvTipAmount.text = "%.2f".format(tipAmount)
+            tvTotalAmount.text = "%.2f".format(totalAmount)
+        }
     }
 
 }

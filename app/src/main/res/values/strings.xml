@@ -3,6 +3,6 @@
     <string name="total">Total</string>
     <string name="tip">Tip</string>
     <string name="base">Base</string>
-    <string name="bill_amount">Bill Amount?</string>
+    <string name="bill_amount">Bill Amount</string>
     <string name="how_much_are_you_going_to_tip">How much are you going to tip?</string>
 </resources>

@@ -75,7 +75,7 @@
         android:layout_height="wrap_content"
         android:max="35"
         app:layout_constraintBottom_toBottomOf="@+id/percentageTip"
-        app:layout_constraintStart_toStartOf="@+id/editTextBaseAmount"
+        app:layout_constraintStart_toStartOf="@+id/etBaseAmount"
         app:layout_constraintTop_toTopOf="@+id/percentageTip" />
 
     <TextView
@@ -91,7 +91,7 @@
         app:layout_constraintTop_toBottomOf="@+id/tipBaseLabel" />
 
     <EditText
-        android:id="@+id/editTextBaseAmount"
+        android:id="@+id/etBaseAmount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
