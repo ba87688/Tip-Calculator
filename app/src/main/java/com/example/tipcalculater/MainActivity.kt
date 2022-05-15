@@ -9,6 +9,8 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.*
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContentProviderCompat.requireContext
+import androidx.core.content.ContextCompat
+import androidx.vectordrawable.graphics.drawable.ArgbEvaluator
 import com.example.tipcalculater.databinding.ActivityMainBinding
 import com.google.android.material.textfield.TextInputLayout
 
@@ -25,6 +27,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var tvTotalAmount: TextView
     private lateinit var totalPerPerson: TextView
     private lateinit var perPersonLabel: TextView
+    private lateinit var tvTipDescribe: TextView
     private lateinit var numberOfPeople: AutoCompleteTextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -52,9 +55,11 @@ class MainActivity : AppCompatActivity() {
         totalPerPerson = binding.totalPerPerson
         perPersonLabel = binding.perPersonLabel
 
+        tvTipDescribe = binding.tipTipDescription
         //set initial value
         seekBarTip.progress = INITIAL_TIP
         tvTipPercentLabel.text = "$INITIAL_TIP%"
+        tipDescriptionUpdate(INITIAL_TIP)
         totalPerPerson.text = ""
 //        totalPerPerson.text = "${numberOfPeople.text.toString().toInt()}"
 
@@ -73,6 +78,7 @@ class MainActivity : AppCompatActivity() {
                 Log.i(TAG, "onProgressChanged: $progress")
                 tvTipPercentLabel.text = "$progress%"
                 calcTipAndTotal()
+                tipDescriptionUpdate(progress)
 
             }
 
@@ -117,6 +123,26 @@ class MainActivity : AppCompatActivity() {
         })
 
 
+    }
+
+    private fun tipDescriptionUpdate(amountOfTip:Int) {
+        val description = when(amountOfTip){
+            in 0..9 -> "Poor"
+            in 10..14 -> "Acceptable"
+            in 15..19 -> "Good"
+            in 20..24 -> "Great"
+            else -> "Amazing"
+
+        }
+        tvTipDescribe.text = description
+
+        //color update
+        var color = ArgbEvaluator().evaluate(
+            amountOfTip.toFloat()/seekBarTip.max,
+            ContextCompat.getColor(this,R.color.color_worst_tip),
+            ContextCompat.getColor(this,R.color.color_best_tip)
+        ) as Int
+        tvTipDescribe.setTextColor(color)
     }
 
     private fun calcTipAndTotal() {
