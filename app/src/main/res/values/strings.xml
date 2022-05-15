@@ -5,4 +5,14 @@
     <string name="base">Base</string>
     <string name="bill_amount">Bill Amount</string>
     <string name="how_much_are_you_going_to_tip">How much are you going to tip?</string>
+    <string name="number_of_people">Number of people?</string>
+    <string name="per_nperson">Per \nperson</string>
+
+    <string-array name="number_of_people">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+    </string-array>
 </resources>
